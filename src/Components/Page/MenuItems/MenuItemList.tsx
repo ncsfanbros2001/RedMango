@@ -5,6 +5,7 @@ import MenuItemCard from './MenuItemCard';
 import { useGetMenuItemsQuery } from '../../../API/menuItemAPI';
 import { useDispatch } from 'react-redux';
 import { setMenuItem } from '../../../Storage/Redux/menuItemSlice';
+import { MainLoader } from '../Common';
 
 function MenuItemList() {
     // const [menuItems, setMenuItems] = useState<MenuItemModel[]>([]);
@@ -18,7 +19,7 @@ function MenuItemList() {
     }, [isLoading])
 
     if (isLoading) {
-        return <div className="d-flex justify-content-center">Loading ...</div>
+        return <MainLoader />
     }
 
     return (

@@ -3,6 +3,7 @@ import { MenuItemModel } from '../../../Interfaces'
 import { Link } from 'react-router-dom'
 import { useUpdateShoppingCartMutation } from '../../../API/shoppingCartAPI'
 import { useState } from 'react'
+import { MiniLoader } from '../Common'
 
 interface Props {
     menuItem: MenuItemModel
@@ -20,8 +21,6 @@ function MenuItemCard(props: Props) {
             updateQuantityBy: 1,
             userId: "39c652e4-e119-4888-9f94-6dae1875066a"
         })
-
-        console.log(response)
 
         setIsAddingToCart(false);
     }
@@ -61,9 +60,12 @@ function MenuItemCard(props: Props) {
                         </i>
                     )}
 
-                    <i
-                        className="bi bi-cart-plus btn btn-outline-danger"
-                        style={{
+                    {isAddingtoCart ? (
+                        <div style={{ position: "absolute", top: "15px", right: "15px" }}>
+                            <MiniLoader />
+                        </div>
+                    ) : (
+                        <i className="bi bi-cart-plus btn btn-outline-danger" style={{
                             position: "absolute",
                             top: "15px",
                             right: "15px",
@@ -72,8 +74,9 @@ function MenuItemCard(props: Props) {
                             outline: "none !important",
                             cursor: "pointer",
                         }}
-                        onClick={() => handleAddToCart(props.menuItem.id)}
-                    ></i>
+                            onClick={() => handleAddToCart(props.menuItem.id)}
+                        ></i>
+                    )}
 
                     <div className="text-center">
                         <p className="card-title m-0 text-success fs-3">
@@ -93,7 +96,7 @@ function MenuItemCard(props: Props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

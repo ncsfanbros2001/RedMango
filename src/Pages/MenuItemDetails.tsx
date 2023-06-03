@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useUpdateShoppingCartMutation } from '../API/shoppingCartAPI';
 import { MainLoader, MiniLoader } from '../Components/Page/Common';
+import { apiResponse } from '../Interfaces';
+import { toastNotify } from '../Helper';
 
 // User ID: 39c652e4-e119-4888-9f94-6dae1875066a
 
@@ -28,13 +30,16 @@ function MenuItemDetails() {
     const handleAddToCart = async (menuItemId: number) => {
         setIsAddingToCart(true);
 
-        const response = await updateShoppingCart({
+        const response : apiResponse = await updateShoppingCart({
             menuItemId: menuItemId,
             updateQuantityBy: quantity,
             userId: "39c652e4-e119-4888-9f94-6dae1875066a"
         })
 
-        console.log(response)
+        if (response.data && response.data.isSuccess)
+        {
+            toastNotify("Item added to cart");
+        }
 
         setIsAddingToCart(false);
     }

@@ -10,7 +10,7 @@ const shoppingCartAPI = createApi({
     endpoints: (builder) => ({
         getShoppingCart: builder.query({
             query: (userId) => ({
-                url: "shoppingCart",
+                url: "ShoppingCart",
                 params: {
                     userId: userId
                 }
@@ -19,7 +19,7 @@ const shoppingCartAPI = createApi({
         }),
         updateShoppingCart: builder.mutation({
             query: ({menuItemId, updateQuantityBy, userId}) => ({
-                url: "shoppingCart",
+                url: "ShoppingCart",
                 method: "POST",
                 params: {
                     menuItemId, updateQuantityBy, userId

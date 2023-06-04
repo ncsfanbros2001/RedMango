@@ -45,19 +45,13 @@ function Header() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" aria-current="page" to="/shoppingCart">
                                     <i className="bi bi-cart"></i>
-                                    {shoppingCartFromStore?.length ? `(${shoppingCartFromStore.length})` : ""}
+                                    {userData.id && `(${shoppingCartFromStore.length})`}
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="/authentication">
-                                    Authentication
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="/authorization">
-                                    Authorization
+                                <NavLink className="nav-link" aria-current="page" to="/order/myOrder">
+                                    Orders
                                 </NavLink>
                             </li>
 

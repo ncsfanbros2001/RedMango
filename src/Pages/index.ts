@@ -5,10 +5,10 @@ import ShoppingCart from "./ShoppingCart";
 import Register from "./Register";
 import Login from "./Login";
 import AccessDenied from "./AccessDenied";
-import AuthenticationTestAdmin from "./AuthenticationTestAdmin";
-import AuthenticationTest from "./AuthenticationTest";
+import Payment from "./Payment";
+import OrderConfirmed from "./Order/OrderConfirmed";
+import MyOrder from "./Order/MyOrder";
 
 export {
-    HomePage, NotFound, MenuItemDetails, ShoppingCart, Login, Register, AccessDenied, AuthenticationTest,
-    AuthenticationTestAdmin
+    HomePage, NotFound, MenuItemDetails, ShoppingCart, Login, Register, AccessDenied, Payment, OrderConfirmed, MyOrder
 }

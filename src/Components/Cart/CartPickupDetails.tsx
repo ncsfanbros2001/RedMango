@@ -1,32 +1,39 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { cartItemModel } from '../../Interfaces';
+import { apiResponse, cartItemModel, userModel } from '../../Interfaces';
 import { RootState } from '../../Storage/Redux/store';
 import { inputHelper } from '../../Helper';
 import { MiniLoader } from '../Page/Common';
+import { useInitiatePaymentMutation } from '../../API/paymentAPI';
+import { useNavigate } from 'react-router-dom';
+
 function CartPickupDetails() {
 
     const shoppingCartFromStore: cartItemModel[] = useSelector(
         (state: RootState) => state.shoppingCartStore.cartItems ?? []
     )
 
+    const userData: userModel = useSelector((state: RootState) => state.userAuthStore)
+
     let grandTotal = 0;
     let totalItems = 0;
 
     const initialUserData = {
-        name: "",
-        email: "",
+        name: userData.fullName,
+        email: userData.email,
         phoneNumber: ""
     }
 
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [userInput, setUserInput] = useState(initialUserData)
-    
+    const [initiatePayment] = useInitiatePaymentMutation();
+
     const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tempData = inputHelper(e, userInput)
         setUserInput(tempData)
     }
-    
+
     shoppingCartFromStore?.map((item: cartItemModel) => {
         totalItems += item.quantity ?? 0
         grandTotal += (item.menuItem?.price ?? 0) * (item.quantity ?? 0)
@@ -36,7 +43,14 @@ function CartPickupDetails() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setLoading(true);
+
+        const { data }: apiResponse = await initiatePayment(userData.id);
+        // const orderSummary = { grandTotal, totalItems };
+        navigate("/payment", {
+            state: { apiResult: data?.result, userInput }
+        })
     }
+    
 
     return (
         <div className="border pb-5 pt-3">
@@ -93,8 +107,8 @@ function CartPickupDetails() {
                     className="btn btn-lg btn-success form-control mt-3"
                     disabled={loading}
                 >
-                    {loading ? <MiniLoader/> : "Place Order"}
-                    
+                    {loading ? <MiniLoader /> : "Place Order"}
+
                 </button>
             </form>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Footer } from '../Components/Layout';
 import {
-    AccessDenied, HomePage, Login, MenuItemDetails, NotFound, Register, ShoppingCart, Payment, OrderConfirmed, MyOrder
+    AccessDenied, HomePage, Login, MenuItemDetails, NotFound, Register, ShoppingCart, Payment, OrderConfirmed, MyOrder, OrderDetails
 } from '../Pages';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react'
@@ -48,6 +48,7 @@ function App() {
                     <Route path="/accessDenied" element={<AccessDenied />} />
                     <Route path='/payment' element={<Payment />} />
                     <Route path='/order/orderConfirmed/:id' element={<OrderConfirmed />} />
+                    <Route path='/order/orderDetails/:id' element={<OrderDetails />} />
                     <Route path='/order/myOrder' element={<MyOrder />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

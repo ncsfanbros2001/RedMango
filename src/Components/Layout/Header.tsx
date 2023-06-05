@@ -4,6 +4,7 @@ import { cartItemModel, userModel } from '../../Interfaces';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../Storage/Redux/store';
 import { emptyUserState, setLoggedInUser } from '../../Storage/Redux/userAuthSlice';
+import { SD_Roles } from '../../Utility/StaticDetail';
 let logo = require('../../Assets/Images/mango.png');
 
 function Header() {
@@ -42,29 +43,36 @@ function Header() {
                                 <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
                             </li>
 
-                            <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="/shoppingCart">
-                                    <i className="bi bi-cart"></i>
-                                    {userData.id && `(${shoppingCartFromStore.length})`}
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="/order/myOrder">
-                                    Orders
-                                </NavLink>
-                            </li>
-
-                            <li className="nav-item dropdown">
+                            {userData.role == SD_Roles.ADMIN ? (<li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Admin Panel
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Action</a></li>
-                                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                                    <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                    <li className="dropdown-item" onClick={() => navigate("order/myOrder")}
+                                        style={{ cursor: "pointer" }}>
+                                        My Orders
+                                    </li>
+                                    <li className="dropdown-item" onClick={() => navigate("order/allOrder")}
+                                        style={{ cursor: "pointer" }}>
+                                        My Orders
+                                    </li>
+                                    <li className="dropdown-item">Action</li>
                                 </ul>
+                            </li>
+                            ) : (
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" aria-current="page" to="/order/myOrder">
+                                        Orders
+                                    </NavLink>
+                                </li>
+                            )}
+
+                            <li className="nav-item">
+                                <NavLink className="nav-link" aria-current="page" to="/shoppingCart">
+                                    <i className="bi bi-cart"></i>
+                                    {userData.id && `(${shoppingCartFromStore.length})`}
+                                </NavLink>
                             </li>
 
                             <div className="d-flex" style={{ marginLeft: "auto" }}>

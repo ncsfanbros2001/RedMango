@@ -15,7 +15,8 @@ const orderAPI = createApi({
                     "Content-type": "application/json"
                 },
                 body: orderDetails
-            })
+            }),
+            invalidatesTags: ["Orders"]
         }),
         getAllOrders: builder.query({
             query: (userId) => ({

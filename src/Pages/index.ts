@@ -8,7 +8,8 @@ import AccessDenied from "./AccessDenied";
 import Payment from "./Payment";
 import OrderConfirmed from "./Order/OrderConfirmed";
 import MyOrder from "./Order/MyOrder";
+import OrderDetails from "./Order/OrderDetails";
 
 export {
-    HomePage, NotFound, MenuItemDetails, ShoppingCart, Login, Register, AccessDenied, Payment, OrderConfirmed, MyOrder
+    HomePage, NotFound, MenuItemDetails, ShoppingCart, Login, Register, AccessDenied, Payment, OrderConfirmed, MyOrder, OrderDetails
 }

@@ -9,7 +9,11 @@ import Payment from "./Payment";
 import OrderConfirmed from "./Order/OrderConfirmed";
 import MyOrder from "./Order/MyOrder";
 import OrderDetails from "./Order/OrderDetails";
+import AllOrders from "./Order/AllOrders";
+import MenuItemListPage from "./MenuItem/MenuItemListPage";
+import MenuItemUpsert from "./MenuItem/MenuItemUpsert";
 
 export {
-    HomePage, NotFound, MenuItemDetails, ShoppingCart, Login, Register, AccessDenied, Payment, OrderConfirmed, MyOrder, OrderDetails
+    HomePage, NotFound, MenuItemDetails, ShoppingCart, Login, Register, AccessDenied, Payment, OrderConfirmed, MyOrder, OrderDetails,
+    AllOrders, MenuItemListPage, MenuItemUpsert
 }

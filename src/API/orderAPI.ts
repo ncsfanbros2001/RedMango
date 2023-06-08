@@ -9,7 +9,7 @@ const orderAPI = createApi({
     endpoints: (builder) => ({
         createOrder: builder.mutation({
             query: (orderDetails) => ({
-                url: "order",
+                url: "Order",
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
@@ -20,7 +20,7 @@ const orderAPI = createApi({
         }),
         getAllOrders: builder.query({
             query: (userId) => ({
-                url: "order",
+                url: "Order",
                 params: {
                     userId: userId
                 }
@@ -29,13 +29,24 @@ const orderAPI = createApi({
         }),
         getOrderDetails: builder.query({
             query: (id) => ({
-                url: `order/${id}`
+                url: `Order/${id}`
             }),
             providesTags: ["Orders"]
+        }),
+        updateOrderHeader: builder.mutation({
+            query: (orderDetails) => ({
+                url: "Order/" + orderDetails.orderHeaderId,
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: orderDetails
+            }),
+            invalidatesTags: ["Orders"]
         })
     })
 })
 
-export const { useCreateOrderMutation, useGetAllOrdersQuery, useGetOrderDetailsQuery } = orderAPI
+export const { useCreateOrderMutation, useGetAllOrdersQuery, useGetOrderDetailsQuery, useUpdateOrderHeaderMutation } = orderAPI
 
 export default orderAPI

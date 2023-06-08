@@ -14,7 +14,7 @@ interface Props {
 }
 
 function MenuItemCard(props: Props) {
-    const [isAddingtoCart, setIsAddingToCart] = useState<boolean>(false);
+    const [isAddingtoCart, setIsAddingToCart] = useState<any>(false);
     const [updateShoppingCart] = useUpdateShoppingCartMutation();
     const userData : userModel = useSelector((state: RootState) => state.userAuthStore)
     const navigate = useNavigate();

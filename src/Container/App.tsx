@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header, Footer } from '../Components/Layout';
 import {
-    AccessDenied, HomePage, Login, MenuItemDetails, NotFound, Register, ShoppingCart, Payment, OrderConfirmed, MyOrder, OrderDetails, AllOrders, MenuItemListPage, MenuItemUpsert
+    AccessDenied, HomePage, Login, MenuItemDetails, NotFound, Register, ShoppingCart, Payment, OrderConfirmed, MyOrder, OrderDetails,
+    AllOrders, MenuItemListPage, MenuItemUpsert
 } from '../Pages';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react'
@@ -13,13 +14,13 @@ import { setLoggedInUser } from '../Storage/Redux/userAuthSlice';
 import jwt_decode from 'jwt-decode';
 import { RootState } from '../Storage/Redux/store';
 
-// password: voztex
-
 function App() {
     const dispatch = useDispatch();
-    const userData : userModel = useSelector((state: RootState) => state.userAuthStore)
-    // "7feb0693-719f-4c88-9de7-178702a5d80d"
+    const [skip, setSkip] = useState(true)
+    const userData: userModel = useSelector((state: RootState) => state.userAuthStore)
     const { data, isLoading } = useGetShoppingCartQuery(userData.id);
+
+
     useEffect(() => {
         const localToken = localStorage.getItem("token")
 

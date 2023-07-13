@@ -3,7 +3,11 @@ import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 const orderAPI = createApi({
     reducerPath: "orderAPI",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://localhost:44363/api/"
+        baseUrl: "https://localhost:44363/api/",
+        prepareHeaders: (headers: Headers, api) => {
+            const token = localStorage.getItem("token")
+            token && headers.append("Authorization", "Bearer " + token)
+        }
     }),
     tagTypes: ["Orders"],
     endpoints: (builder) => ({

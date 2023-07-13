@@ -1,12 +1,15 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
-import { url } from "inspector";
 
 const shoppingCartAPI = createApi({
     reducerPath: "shoppingCartAPI",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://localhost:44363/api/"
+        baseUrl: "https://localhost:44363/api/",
+        prepareHeaders: (headers: Headers, api) => {
+            const token = localStorage.getItem("token")
+            token && headers.append("Authorization", "Bearer " + token)
+        }
     }),
-    tagTypes: ["ShoppingCarts"], 
+    tagTypes: ["ShoppingCarts"],
     endpoints: (builder) => ({
         getShoppingCart: builder.query({
             query: (userId) => ({
@@ -18,7 +21,7 @@ const shoppingCartAPI = createApi({
             providesTags: ["ShoppingCarts"]
         }),
         updateShoppingCart: builder.mutation({
-            query: ({menuItemId, updateQuantityBy, userId}) => ({
+            query: ({ menuItemId, updateQuantityBy, userId }) => ({
                 url: "ShoppingCart",
                 method: "POST",
                 params: {

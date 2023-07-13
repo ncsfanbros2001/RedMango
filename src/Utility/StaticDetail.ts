@@ -18,3 +18,10 @@ export enum SD_CATEGORIES {
     DESSERT = "Dessert",
     BEVERAGES = "Beverages"
 }
+
+export enum SD_SortMode {
+    PRICE_LOW_2_HIGH = "Price Low - High",
+    PRICE_HIGH_2_LOW = "Price High - Low",
+    NAME_A_Z = "Name A - Z",
+    NAME_Z_A = "Name Z - A"
+}

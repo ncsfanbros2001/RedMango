@@ -41,6 +41,7 @@ function MenuItemUpsert() {
                 category: data.result.category,
                 price: data.result.price
             }
+
             setMenuItemInputs(tempData)
             setImageToDisplay(data.result.image)
         }
@@ -97,6 +98,7 @@ function MenuItemUpsert() {
         formData.append("Name", menuItemInputs.name)
         formData.append("Description", menuItemInputs.description)
         formData.append("SpecialTag", menuItemInputs.specialTag ?? "")
+        formData.append("Category", menuItemInputs.category)
         formData.append("Price", menuItemInputs.price)
         if (imageToDisplay) {
             formData.append("File", imageToStore)
@@ -165,8 +167,8 @@ function MenuItemUpsert() {
                                 value={menuItemInputs.category}
                                 onChange={handleMenuItemInput}
                             >
-                                {Categories.map((category) => (
-                                    <option value={category}>{category}</option>
+                                {Categories.map((category, key) => (
+                                    <option value={category} key={key}>{category}</option>
                                 ))}
                             </select>
                             <input
@@ -191,7 +193,7 @@ function MenuItemUpsert() {
                                     </button>
                                 </div>
                                 <div className="col-6">
-                                    <a onClick={() => navigate("menuItem/MenuItemListPage")}
+                                    <a onClick={() => navigate("/MenuItem/MenuItemListPage")}
                                         className="btn btn-secondary form-control mt-3">
                                         Back To Menu Items
                                     </a>

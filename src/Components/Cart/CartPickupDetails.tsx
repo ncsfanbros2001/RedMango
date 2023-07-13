@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { apiResponse, cartItemModel, userModel } from '../../Interfaces';
 import { RootState } from '../../Storage/Redux/store';
@@ -39,6 +39,14 @@ function CartPickupDetails() {
         grandTotal += (item.menuItem?.price ?? 0) * (item.quantity ?? 0)
         return null
     })
+
+    useEffect(() => {
+        setUserInput({
+            name: userData.fullName,
+            email: userData.email,
+            phoneNumber: ""
+        })
+    }, [userData])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
